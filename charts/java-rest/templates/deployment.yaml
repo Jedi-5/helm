@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-api
+spec:
+  replicas: {{ .Values.restApi.replicas }}
+  selector:
+    matchLabels:
+      app: rest-api
+  template:
+    metadata:
+      labels:
+        app: rest-api
+    spec:
+      containers:
+      - env:
+        - name: rest-api
+        image: {{ .Values.restApi.restApi.image.repository }}:{{ .Values.restApi.restApi.image.tag }}
+        name: rest-api
+        ports:
+        - containerPort: 8080
+          name: tcp
+        resources: {{- toYaml .Values.restApi.restApi.resources | nindent 10 }}

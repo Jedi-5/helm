@@ -1,0 +1,20 @@
+kubernetesClusterDomain: cluster.local
+
+restApi:
+  replicas: 2
+  restApi:
+    image:
+      repository: kaniskapadhi/java-rest
+      tag: v1
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+
+  type: NodePort
+  ports:
+  - name: http
+    nodePort: 30036
+    port: 80
+    protocol: TCP
+    targetPort: 8080
