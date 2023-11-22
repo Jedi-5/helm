@@ -8,17 +8,41 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
-      - name: Configure Git user
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Helm
+        uses: actions/setup-helm@v3
+        with:
+          version: '3'
+
+      - name: Build Helm charts
         run: |
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-      - name: Run chart-releaser job
-        uses: helm/chart-releaser-action@v1.4.0
-        env:
-          CR_TOKEN: "${{ secrets.GHA_TOKEN }}"
+          helm lint charts/
+          helm package charts/
+
+      - name: Upload Helm charts to GitHub Releases
+        uses: actions/upload-artifact@v3
+        with:
+          name: helm-charts
+          path: '*.tgz'
+
+      - name: Create Helm chart repository index
+        run: |
+          helm repo index charts --url https://Jedi-5.github.io/helm/charts --force
+
+      - name: Upload index.yaml to GitHub Releases
+        uses: actions/upload-artifact@v3
+        with:
+          name: index.yaml
+          path: index.yaml
+
+      - name: Create GitHub Release
+        uses: actions/create-github-release@v3
+        with:
+          release_name: ${{ github.event.release.tag_name }}
+          asset_paths: ./index.yaml,'**/helm-charts/*.tgz'
+          draft: false
+          prerelease: false
