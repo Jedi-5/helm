@@ -2,14 +2,14 @@ apiVersion: v1
 entries:
   java-rest:
   - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2023-11-22T19:23:25.154350118Z"
-    description: Java-REST Helm chart for K8s
+    appVersion: 1.17.0
+    created: "2023-11-26T19:23:25.154350118Z"
+    description: Java-REST Helm chart for K8s App
     digest: 3f163254702c19918ce503125a79540557509a904dab1009b41d24bd23c8fe63
     icon: https://commons.wikimedia.org/wiki/File:Flag_of_India.png
     name: java-rest
     type: application
     urls:
-    - https://github.com/Jedi-5/helm/releases/download/java-rest-0.1.0/java-rest-0.1.0.tgz
-    version: 0.1.0
-generated: "2023-11-22T19:23:25.154363373Z"
+    - https://github.com/Jedi-5/helm/releases/download/java-rest-0.2.0/java-rest-0.2.0.tgz
+    version: 0.2.0
+generated: "2023-11-26T19:23:25.154363373Z"
