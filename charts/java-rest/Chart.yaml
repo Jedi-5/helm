@@ -1,7 +1,7 @@
 apiVersion: v2
 name: java-rest
-description: Java-REST Helm chart for K8s
+description: Java-REST Helm chart for K8s App
 type: application
-version: 0.1.0
-appVersion: "1.16.0"
+version: 0.2.0
+appVersion: "1.17.0"
 icon: https://commons.wikimedia.org/wiki/File:Flag_of_India.png
